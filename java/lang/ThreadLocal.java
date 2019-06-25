@@ -201,12 +201,15 @@ public class ThreadLocal<T> {
      *        this thread-local.
      */
     public void set(T value) {
+        // 1.获取当前线程的成员变量map
         Thread t = Thread.currentThread();
         ThreadLocalMap map = getMap(t);
+        // 2.map非空，则重新将ThreadLocal和新的value副本放入到map中
         if (map != null)
             map.set(this, value);
         else
             createMap(t, value);
+        // 3.map为空，则对线程的成员变量ThreadLocalMap进行初始化创建，并将ThreadLocal和value副本放入map中
     }
 
     /**
