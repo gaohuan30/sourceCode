@@ -289,6 +289,7 @@ public class ThreadLocal<T> {
      * needing to subclass the map class in InheritableThreadLocal.
      * This technique is preferable to the alternative of embedding
      * instanceof tests in methods.
+     *
      */
     T childValue(T parentValue) {
         throw new UnsupportedOperationException();

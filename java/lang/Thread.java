@@ -361,6 +361,7 @@ class Thread implements Runnable {
      *            AccessController.getContext() if null
      * @param inheritThreadLocals if {@code true}, inherit initial values for
      *            inheritable thread-locals from the constructing thread
+     * 在子线程启动时，调用init方法，如果父线程有InheritableThreadLocal变量，则在子线程也生成一份
      */
     private void init(ThreadGroup g, Runnable target, String name,
                       long stackSize, AccessControlContext acc,
@@ -415,6 +416,7 @@ class Thread implements Runnable {
                 acc != null ? acc : AccessController.getContext();
         this.target = target;
         setPriority(priority);
+        // 调用createInheritedMap方法，并调用childValue方法复制一份变量给子线程
         if (inheritThreadLocals && parent.inheritableThreadLocals != null)
             this.inheritableThreadLocals =
                 ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);
