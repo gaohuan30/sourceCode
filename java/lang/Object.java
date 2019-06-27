@@ -33,6 +33,7 @@ package java.lang;
  * @author  unascribed
  * @see     java.lang.Class
  * @since   JDK1.0
+ * wait,notify,notifyAll 是Object类的final native方法，所以这些方法不能被子类重写，Object类是所有类的超类
  */
 public class Object {
 
@@ -144,6 +145,7 @@ public class Object {
      *          argument; {@code false} otherwise.
      * @see     #hashCode()
      * @see     java.util.HashMap
+     * Object的equals方法直接比较内存地址
      */
     public boolean equals(Object obj) {
         return (this == obj);
@@ -378,6 +380,7 @@ public class Object {
      *             this exception is thrown.
      * @see        java.lang.Object#notify()
      * @see        java.lang.Object#notifyAll()
+     *
      */
     public final native void wait(long timeout) throws InterruptedException;
 
@@ -551,6 +554,12 @@ public class Object {
      * @see java.lang.ref.WeakReference
      * @see java.lang.ref.PhantomReference
      * @jls 12.6 Finalization of Class Instances
+     * 作用：
+     *  子类可以覆盖该方法以实现资源清理工作，GC在回收对象之前调用该方法
+     *  不建议用finalize方法完成“非内存资源”的清理工作，但建议用于：① 清理本地对象(通过JNI创建的对象)；② 作为确保某些非内存资源(如Socket、文件等)释放的一个补充：在finalize方法中显式调用其他资源释放方法
+     * 问题：
+     *      此方法只会执行一次
+     *  博客参考:https://www.cnblogs.com/Smina/p/7189427.html
      */
     protected void finalize() throws Throwable { }
 }
