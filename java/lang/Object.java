@@ -210,6 +210,11 @@ public class Object {
      *               throw this exception to indicate that an instance cannot
      *               be cloned.
      * @see java.lang.Cloneable
+     *      implements Cloneable  覆盖clone()方法
+     * 浅复制(潜克隆)
+     *      被复制对象的所有变量都含有与原来的对象相同的值，而所有的对对象的引用仍然指向原来的对象。换言之，浅复制仅仅复制所考虑的对象，而不复制它引用的对象
+     *  深复制(深克隆)
+     *      被复制对象的所有变量都含有与原来的对象相同的值，除去那些引用其他对象的变量。那些引用其他对象的变量将指向被复制过的新对象，而不再是原有的那些被引用的对象，换言之，深复制要把复制的对象所引用的对象都复制了一遍
      */
     protected native Object clone() throws CloneNotSupportedException;
 
