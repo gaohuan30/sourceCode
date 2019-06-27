@@ -108,12 +108,22 @@ import java.util.regex.PatternSyntaxException;
  * @since   JDK1.0
  */
 
+/**
+ * java.io.Serializable 这个序列化接口没有任何方法和域，仅用于标识序列化的语意
+ *
+ * Comparable<String>  这个接口只有一个comparaTo(T O)接口，用于对两个实例化对象比较大小
+ *
+ * CharSequence 这个接口是一个只读的字符序列。包括length(), charAt(int index), subSequence(int start, int end)这几个API接口，值得一提的是，StringBuffer和StringBuild也是实现了改接口
+ */
 public final class String
     implements java.io.Serializable, Comparable<String>, CharSequence {
     /** The value is used for character storage. */
+    /** 该值用于字符存储. */
     private final char value[];
 
     /** Cache the hash code for the string */
+    /** 缓存字符串的哈希码 */
+    /** hash是String实例化的hashcode的一个缓存。因为String 经常被用于比较，比如在HashMap中，如果每次进行比较都重新计算hashcode的值的话，比较麻烦，保存一个hashcode的缓存便于优化 */
     private int hash; // Default to 0
 
     /** use serialVersionUID from JDK 1.0.2 for interoperability */
@@ -682,6 +692,9 @@ public final class String
      *             string.
      * @since      1.5
      */
+    /**
+     * 返回特定字符的ASCII码值或unicode值
+     */
     public int codePointAt(int index) {
         if ((index < 0) || (index >= value.length)) {
             throw new StringIndexOutOfBoundsException(index);
@@ -778,6 +791,8 @@ public final class String
     /**
      * Copy characters from this string into dst starting at dstBegin.
      * This method doesn't perform any range checking.
+     * 将字符串复制到dst数组中，复制到dst数组的起始位置可以指定。
+     * 该方法并没有检测复制到dst数据后是否越界
      */
     void getChars(char dst[], int dstBegin) {
         System.arraycopy(value, 0, dst, dstBegin, value.length);
@@ -869,6 +884,7 @@ public final class String
      *                 dst.length}
      *          </ul>
      */
+    // 获取当前字符串的二进制
     @Deprecated
     public void getBytes(int srcBegin, int srcEnd, byte dst[], int dstBegin) {
         if (srcBegin < 0) {
@@ -1010,6 +1026,7 @@ public final class String
      *
      * @since  1.4
      */
+    // 只比较内容
     public boolean contentEquals(StringBuffer sb) {
         return contentEquals((CharSequence)sb);
     }
@@ -1183,6 +1200,7 @@ public final class String
      */
     public static final Comparator<String> CASE_INSENSITIVE_ORDER
                                          = new CaseInsensitiveComparator();
+    // 用于忽略大小写得比较两个字符串
     private static class CaseInsensitiveComparator
             implements Comparator<String>, java.io.Serializable {
         // use serialVersionUID from JDK 1.2.2 for interoperability
@@ -1270,6 +1288,9 @@ public final class String
      * @return  {@code true} if the specified subregion of this string
      *          exactly matches the specified subregion of the string argument;
      *          {@code false} otherwise.
+     */
+    /**
+     *  比较该字符串和其他一个字符串从分别指定地点开始的n个字符是否相等
      */
     public boolean regionMatches(int toffset, String other, int ooffset,
             int len) {
@@ -1399,6 +1420,7 @@ public final class String
      *          this.substring(toffset).startsWith(prefix)
      *          </pre>
      */
+    // 判断当前字符串是否以某一段其他字符串开始的
     public boolean startsWith(String prefix, int toffset) {
         char ta[] = value;
         int to = toffset;
@@ -1694,6 +1716,7 @@ public final class String
      * @return  the index of the first occurrence of the specified substring,
      *          or {@code -1} if there is no such occurrence.
      */
+    // 主要是实现找到某个子串在当前字符串的起始位置，若没找到，则返回-1。
     public int indexOf(String str) {
         return indexOf(str, 0);
     }
@@ -1922,6 +1945,7 @@ public final class String
      *             {@code beginIndex} is negative or larger than the
      *             length of this {@code String} object.
      */
+    // 指定头尾返回子串
     public String substring(int beginIndex) {
         if (beginIndex < 0) {
             throw new StringIndexOutOfBoundsException(beginIndex);
@@ -2023,6 +2047,7 @@ public final class String
      * @return  a string that represents the concatenation of this object's
      *          characters followed by the string argument's characters.
      */
+    // concat的作用是将str拼接到当前字符串后面
     public String concat(String str) {
         int otherLen = str.length();
         if (otherLen == 0) {
