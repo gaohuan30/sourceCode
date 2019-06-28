@@ -48,6 +48,12 @@ import java.io.IOException;
  *
  * @since 1.5
  */
+
+/**
+ * append(CharSequence csq) throws IOException:如何添加一个字符序列
+ * append(CharSequence csq, int start, int end) throws IOException：如何添加一个字符序列的一部分
+ * append(char c) throws IOException:如何添加一个字符
+ */
 public interface Appendable {
 
     /**

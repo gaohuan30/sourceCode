@@ -56,6 +56,12 @@ import java.util.stream.StreamSupport;
  * @spec JSR-51
  */
 
+/**
+ * 该接口规定了需要实现该字符序列的长度:length()；
+ * 可以取得下标为index的的字符：charAt(int index)；
+ * 可以得到该字符序列的一个子字符序列： subSequence(int start, int end)；
+ * 规定了该字符序列的String版本（重写了父类Object的toString()）：toString();
+ */
 public interface CharSequence {
 
     /**
