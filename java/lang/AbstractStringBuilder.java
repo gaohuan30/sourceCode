@@ -115,7 +115,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      *
      * @param minimumCapacity the minimum desired capacity.
      */
-    // 确保value数据容量是否够用
+    // 确保value数据容量是否够用 / 不够的话扩容
     public void ensureCapacity(int minimumCapacity) {
         if (minimumCapacity > 0)
             ensureCapacityInternal(minimumCapacity);
@@ -127,6 +127,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * synchronized.
      * If {@code minimumCapacity} is non positive due to numeric
      * overflow, this method throws {@code OutOfMemoryError}.
+     * 扩容操作
      */
     private void ensureCapacityInternal(int minimumCapacity) {
         // overflow-conscious code
@@ -154,6 +155,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * @param minCapacity the desired minimum capacity
      * @throws OutOfMemoryError if minCapacity is less than zero or
      *                          greater than Integer.MAX_VALUE
+     * 计算扩容后的容量大小  2*原容量 + 2
      */
     private int newCapacity(int minCapacity) {
         // overflow-conscious code
@@ -180,6 +182,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * characters, then it may be resized to become more space efficient.
      * Calling this method may, but is not required to, affect the value
      * returned by a subsequent call to the {@link #capacity()} method.
+     * 如果value数组的容量有多余的，那么就把多余的全部都释放掉
      */
     public void trimToSize() {
         if (count < value.length) {
@@ -211,6 +214,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * @param newLength the new length
      * @throws IndexOutOfBoundsException if the
      *                                   {@code newLength} argument is negative.
+     * 强制增大实际长度count的大小，容量如果不够就用 扩容 null即'\0'补位
      */
     public void setLength(int newLength) {
         if (newLength < 0)
