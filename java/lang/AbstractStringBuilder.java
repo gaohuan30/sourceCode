@@ -456,10 +456,10 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      */
     public AbstractStringBuilder append(String str) {
         if (str == null)
-            return appendNull();
+            return appendNull(); // 结尾添加null
         int len = str.length();
-        ensureCapacityInternal(count + len);
-        str.getChars(0, len, value, count);
+        ensureCapacityInternal(count + len); // 扩容
+        str.getChars(0, len, value, count);  // 元素放入value中
         count += len;
         return this;
     }
