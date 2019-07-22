@@ -85,6 +85,7 @@ public class Executors {
      * @return the newly created thread pool
      * @throws IllegalArgumentException if {@code nThreads <= 0}
      */
+    // new LinkedBlockingQueue 这里可以看出申明的无界队列大小，默认大小是Integer.MAX_VALUE
     public static ExecutorService newFixedThreadPool(int nThreads) {
         return new ThreadPoolExecutor(nThreads, nThreads,
                                       0L, TimeUnit.MILLISECONDS,
