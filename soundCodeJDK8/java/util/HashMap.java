@@ -1974,6 +1974,11 @@ public class HashMap<K,V> extends AbstractMap<K,V>
          * Forms tree of the nodes linked from this node.
          * @return root of tree
          * 将链表结构构件成红黑树
+         *  红黑树规则
+         *  1.根节点是黑色的
+         *  2.红节点可以为左孩子，也可以为右孩子，一个节点可以同时有两个红色的左右孩子
+         *  3.红节点的子节点必须是黑节点
+         *  4.没个节点到根节点的路径上黑色节点数量相同
          */
         final void treeify(Node<K,V>[] tab) {
             TreeNode<K,V> root = null;
@@ -2312,10 +2317,21 @@ public class HashMap<K,V> extends AbstractMap<K,V>
             return root;
         }
 
+        /**
+         * 往红黑树种平衡插入节点x
+         * @param root
+         * @param x
+         * @param <K>
+         * @param <V>
+         * @return
+         */
         static <K,V> TreeNode<K,V> balanceInsertion(TreeNode<K,V> root,
                                                     TreeNode<K,V> x) {
+            // 插入的新节点默认为红色
             x.red = true;
+            // 自旋
             for (TreeNode<K,V> xp, xpp, xppl, xppr;;) {
+                // x为根节点
                 if ((xp = x.parent) == null) {
                     x.red = false;
                     return x;
