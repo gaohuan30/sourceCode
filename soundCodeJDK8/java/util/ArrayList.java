@@ -110,6 +110,7 @@ public class ArrayList<E> extends AbstractList<E>
 
     /**
      * Default initial capacity.
+     * 动态数组，初始容量是10
      */
     private static final int DEFAULT_CAPACITY = 10;
 
@@ -219,11 +220,15 @@ public class ArrayList<E> extends AbstractList<E>
         }
     }
 
+    /**
+     * 数组容量校验
+     * @param minCapacity 当前容量+1 值
+     */
     private void ensureCapacityInternal(int minCapacity) {
         if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
             minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);
         }
-
+        // 确保清楚容量
         ensureExplicitCapacity(minCapacity);
     }
 
@@ -248,10 +253,12 @@ public class ArrayList<E> extends AbstractList<E>
      * number of elements specified by the minimum capacity argument.
      *
      * @param minCapacity the desired minimum capacity
+     *                    扩展/扩容
      */
     private void grow(int minCapacity) {
         // overflow-conscious code
         int oldCapacity = elementData.length;
+        // 扩容比例是1.5倍
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         if (newCapacity - minCapacity < 0)
             newCapacity = minCapacity;
@@ -426,6 +433,7 @@ public class ArrayList<E> extends AbstractList<E>
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public E get(int index) {
+        // 范围检查
         rangeCheck(index);
 
         return elementData(index);

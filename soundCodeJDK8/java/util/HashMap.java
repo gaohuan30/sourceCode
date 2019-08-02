@@ -725,6 +725,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
      *  该函数有两种使用情况: 1.初始化哈希表
      *                          2. 当前数组容量过小，需要扩容
      * @return the table
+     * 扩容方法
      */
     final Node<K,V>[] resize() {
         Node<K,V>[] oldTab = table;// 扩容前的数组（当前数组）
@@ -832,6 +833,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
                 }
                 tl = p;
             } while ((e = e.next) != null);
+            // 将改拉链组成treeNode链表
             if ((tab[index] = hd) != null)
                 hd.treeify(tab);
         }

@@ -211,14 +211,14 @@ public class LinkedList<E>
         final E element = x.item;
         final Node<E> next = x.next;
         final Node<E> prev = x.prev;
-
+        // 如果当前节点为首节点
         if (prev == null) {
             first = next;
         } else {
             prev.next = next;
             x.prev = null;
         }
-
+        // 如果当前节点为尾节点
         if (next == null) {
             last = prev;
         } else {
@@ -490,6 +490,7 @@ public class LinkedList<E>
         checkElementIndex(index);
         Node<E> x = node(index);
         E oldVal = x.item;
+        // 只是将node节点的item替换，next和prev不做更改
         x.item = element;
         return oldVal;
     }
