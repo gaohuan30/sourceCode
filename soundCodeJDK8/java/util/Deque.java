@@ -190,6 +190,9 @@ package java.util;
  * @since  1.6
  * @param <E> the type of elements held in this collection
  */
+// 双端队列，是一种具有队列和栈的性质的数据结构。双端队列中的元素可以从两端弹出，相比list增加 运算符重载
+    // 双向队列是指该队列的两端的元素既能入队(offer)也能出队(poll)
+    // 如果将Deque限制为只能从一端入队和出队则可以实现栈的数据结构.对于栈而言,有入栈(push)和出栈(pop)，遵循现进后出原则
 public interface Deque<E> extends Queue<E> {
     /**
      * Inserts the specified element at the front of this deque if it is
@@ -427,6 +430,7 @@ public interface Deque<E> extends Queue<E> {
      * @throws IllegalArgumentException if some property of the specified
      *         element prevents it from being added to this deque
      */
+    // 将元素追加到队列尾部，若添加成功返回true
     boolean offer(E e);
 
     /**
@@ -452,6 +456,7 @@ public interface Deque<E> extends Queue<E> {
      * @return the first element of this deque, or {@code null} if
      *         this deque is empty
      */
+    // 从队首删除并返回该元素
     E poll();
 
     /**
@@ -477,6 +482,7 @@ public interface Deque<E> extends Queue<E> {
      * @return the head of the queue represented by this deque, or
      *         {@code null} if this deque is empty
      */
+    // 返回队首元素，但是不删除
     E peek();
 
 
@@ -500,6 +506,7 @@ public interface Deque<E> extends Queue<E> {
      * @throws IllegalArgumentException if some property of the specified
      *         element prevents it from being added to this deque
      */
+    // 将给定元素 压入 栈中，存入元素会在栈首
     void push(E e);
 
     /**
@@ -512,6 +519,7 @@ public interface Deque<E> extends Queue<E> {
      *         of the stack represented by this deque)
      * @throws NoSuchElementException if this deque is empty
      */
+    // 将栈首元素删除并返回
     E pop();
 
 

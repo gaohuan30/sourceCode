@@ -648,6 +648,7 @@ public class LinkedList<E>
      * @return the head of this list, or {@code null} if this list is empty
      * @since 1.5
      */
+    // 返回头部元素，不删除
     public E peek() {
         final Node<E> f = first;
         return (f == null) ? null : f.item;
@@ -670,6 +671,7 @@ public class LinkedList<E>
      * @return the head of this list, or {@code null} if this list is empty
      * @since 1.5
      */
+    // 返回头部元素，并删除
     public E poll() {
         final Node<E> f = first;
         return (f == null) ? null : unlinkFirst(f);

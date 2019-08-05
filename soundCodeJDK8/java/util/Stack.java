@@ -45,6 +45,7 @@ package java.util;
  * @author  Jonathan Payne
  * @since   JDK1.0
  */
+// 栈是一种LIFO(先进后出，后进先出)的结构，只允许在表的一端进行插入和删除运算
 public
 class Stack<E> extends Vector<E> {
     /**
@@ -63,6 +64,7 @@ class Stack<E> extends Vector<E> {
      * @return  the <code>item</code> argument.
      * @see     java.util.Vector#addElement
      */
+    // 压栈，
     public E push(E item) {
         addElement(item);
 
@@ -77,6 +79,7 @@ class Stack<E> extends Vector<E> {
      *          of the <tt>Vector</tt> object).
      * @throws  EmptyStackException  if this stack is empty.
      */
+    // 出栈，并删除
     public synchronized E pop() {
         E       obj;
         int     len = size();
@@ -95,6 +98,7 @@ class Stack<E> extends Vector<E> {
      *          of the <tt>Vector</tt> object).
      * @throws  EmptyStackException  if this stack is empty.
      */
+    // 返回元素，不删除
     public synchronized E peek() {
         int     len = size();
 

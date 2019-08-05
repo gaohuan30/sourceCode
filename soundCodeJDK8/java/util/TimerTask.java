@@ -32,6 +32,7 @@ package java.util;
  * @see     Timer
  * @since   1.3
  */
+// TimerTask是一个实现了Runnable接口的抽象类，代表一个可以被Timer执行的任务
 
 public abstract class TimerTask implements Runnable {
     /**

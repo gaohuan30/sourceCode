@@ -85,7 +85,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @see     Object#wait(long)
  * @since   1.3
  */
-
+// JDK提供的一个定时器工具，使用的时候会在主线程之外另起一个单独的线程执行指定的计划任务，可以指定执行一次或者反复执行多次
 public class Timer {
     /**
      * The timer task queue.  This data structure is shared with the timer
@@ -425,6 +425,7 @@ public class Timer {
      * <p>This method may be called repeatedly; the second and subsequent
      * calls have no effect.
      */
+    // 清空queue，size置o，
     public void cancel() {
         synchronized(queue) {
             thread.newTasksMayBeScheduled = false;

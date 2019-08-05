@@ -141,6 +141,10 @@ package java.util;
  * @author Doug Lea
  * @param <E> the type of elements held in this collection
  */
+// 队列 支持 FIFO(先进先出)的结构，队头删除，队尾添加
+// 1.虽然LinkedList没有禁止添加null，但是一般情况下Queue的实现类都不允许添加null元素.因为poll() peek() 方法在异常的时候会返回null，当添加null后，获取是不好区分是否正确返回
+// 2.Queue一般都是FIFO ，但是也有例外，比如优先队列 priority queue(它的顺序是根据自然排序或者自定义comparator的);再比如LIFO的队列
+// 不论进入，出去的先后顺序是怎么样的，使用remove(),poll()都是操作头部的元素。而插入的位置不一定是咋队尾，不同queue会有不同的插入逻辑
 public interface Queue<E> extends Collection<E> {
     /**
      * Inserts the specified element into this queue if it is possible to do so
@@ -159,6 +163,7 @@ public interface Queue<E> extends Collection<E> {
      * @throws IllegalArgumentException if some property of this element
      *         prevents it from being added to this queue
      */
+    // 尾部添加元素，原则禁止添加null元素，null添加失败
     boolean add(E e);
 
     /**
@@ -178,6 +183,7 @@ public interface Queue<E> extends Collection<E> {
      * @throws IllegalArgumentException if some property of this element
      *         prevents it from being added to this queue
      */
+    // 尾部添加元素，原则禁止添加null元素，null添加 返回false
     boolean offer(E e);
 
     /**
@@ -188,6 +194,7 @@ public interface Queue<E> extends Collection<E> {
      * @return the head of this queue
      * @throws NoSuchElementException if this queue is empty
      */
+    // 删除并返回头部 队列为空是，报错NoSuchElementException
     E remove();
 
     /**
@@ -196,6 +203,7 @@ public interface Queue<E> extends Collection<E> {
      *
      * @return the head of this queue, or {@code null} if this queue is empty
      */
+    // 删除并返回头部，队列为空是，返回null
     E poll();
 
     /**
@@ -206,6 +214,7 @@ public interface Queue<E> extends Collection<E> {
      * @return the head of this queue
      * @throws NoSuchElementException if this queue is empty
      */
+    // 获取但不删除，队列为空，抛出异常
     E element();
 
     /**
@@ -214,5 +223,6 @@ public interface Queue<E> extends Collection<E> {
      *
      * @return the head of this queue, or {@code null} if this queue is empty
      */
+    // 获取但不删除，队列为空，返回null
     E peek();
 }
